@@ -37,8 +37,10 @@ echo('    <!-- Navigation -->
         <!-- /.container -->
     </nav>');
 
-if (isset($_GET['site']) && $_GET['site'] != "") {
-    include $_GET['site'];
+
+$includeFile =  __DIR__ . "/" .pathinfo($_GET['site'])["filename"] . ".php";
+if (isset($_GET['site']) && $_GET['site'] != "" && file_exists($includeFile)) {
+    include_once $includeFile;
 } else {
     $description = nl2br(file_get_contents("README.md"));
     echo('    <!-- Page Content -->
